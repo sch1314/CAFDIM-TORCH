@@ -5,7 +5,7 @@ import glob
 import numpy as np
 from scipy import io
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()  # 禁用 TF 2.x 的 eager execution
+tf.disable_v2_behavior()
 
 import models
 import VGG16
@@ -136,21 +136,20 @@ try:
         # print(lst)
         for l in range(len(lst)):
             file_path = lst[l]
-            # print(f"Processing file: {file_path}")
-            # 读取每个npz文件
+
             data = np.load(file_path)
 
-            # 假设npz文件中存储了'ldct'和'hdct'数组
+
             validInput = np.float32(data['ldct'])
             validLabel = np.float32(data['hdct'])
 
             validInput[validInput < 0] = 0
             validLabel[validLabel < 0] = 0
-            # 处理每个二维切片
-            valid_input = np.reshape(validInput, [1, 512, 512, channel])  # 假设 channel = 1
+
+            valid_input = np.reshape(validInput, [1, 512, 512, channel])  #  channel = 1
             valid_label = np.reshape(validLabel, [1, 512, 512, channel])
 
-            # 计算验证集损失
+
             valid_loss = sess.run(loss, feed_dict={low_holder: valid_input,
                                                    label_holder: valid_label,
                                                    train_holder: False})
