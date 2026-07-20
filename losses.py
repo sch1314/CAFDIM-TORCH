@@ -256,17 +256,6 @@ def ssim(img1, img2, window_size = 11, size_average = True):
 
 
 def vifp(recon, target, sigma_nsq=0.4):
-    """
-    计算VIF指标，用于衡量图像重建的质量。
-
-    参数：
-    recon: 重建图像，torch张量（预测）
-    target: 目标图像，torch张量 (原始)
-    sigma_nsq: 噪声方差，默认值为0.4
-
-    返回值：
-    vif: VIF指标值
-    """
     recon = recon.float()  # 转换为浮点数类型
 
     mu1 = F.avg_pool2d(recon, kernel_size=3, stride=1, padding=1)  # 平均池化
@@ -295,16 +284,7 @@ def vifp(recon, target, sigma_nsq=0.4):
 
 
 def mae(recon, target):
-    """
-    计算MAE指标，用于衡量图像重建的质量。
 
-    参数：
-    recon: 重建图像，torch张量
-    target: 目标图像，torch张量
-
-    返回值：
-    mae: MAE指标值
-    """
     # 计算差的绝对值
     abs_diff = torch.abs(recon - target)
 
