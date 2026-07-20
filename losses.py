@@ -256,9 +256,9 @@ def ssim(img1, img2, window_size = 11, size_average = True):
 
 
 def vifp(recon, target, sigma_nsq=0.4):
-    recon = recon.float()  # 转换为浮点数类型
+    recon = recon.float()
 
-    mu1 = F.avg_pool2d(recon, kernel_size=3, stride=1, padding=1)  # 平均池化
+    mu1 = F.avg_pool2d(recon, kernel_size=3, stride=1, padding=1)
     mu2 = F.avg_pool2d(target, kernel_size=3, stride=1, padding=1)
 
     recon_sq = recon ** 2
@@ -285,10 +285,10 @@ def vifp(recon, target, sigma_nsq=0.4):
 
 def mae(recon, target):
 
-    # 计算差的绝对值
+
     abs_diff = torch.abs(recon - target)
 
-    # 计算平均绝对误差
+
     mae = torch.mean(abs_diff)
 
     return mae.item()
