@@ -2,7 +2,7 @@
 
 import tensorflow as tf
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()  # 禁用 TF 2.x 的 eager executio
+tf.disable_v2_behavior()
 
 def batch_norm(input_, name='BN', bn_train=True):
     return tf.layers.batch_normalization(input_, scale=True, epsilon=1e-8,
